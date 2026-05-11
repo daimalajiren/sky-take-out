@@ -30,6 +30,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      *
      * @param registry
      */
+    //为前期方便全部放行，最后再修改
     protected void addInterceptors(InterceptorRegistry registry) {
         log.info("开始注册自定义拦截器...");
         registry.addInterceptor(jwtTokenAdminInterceptor)
