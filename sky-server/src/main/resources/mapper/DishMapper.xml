@@ -10,4 +10,29 @@
        #{createTime},#{updateTime},#{createUser},#{updateUser},#{description})
    </insert>
 
+    <select id="page" resultType="com.sky.vo.DishVO">
+    select d.*,c.name as categoryName from dish d left join category c
+    on d.category_id = c.id
+        <where>
+            <if test="name != null and name != ''">
+                and d.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and d.status = #{status}
+            </if>
+        </where>
+        order by d.update_time desc
+    </select>
+
+
+    <delete id="deleteById">
+        delete from dish where id in
+        <foreach item="id" collection="ids" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
 </mapper>
