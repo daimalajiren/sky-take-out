@@ -10,3 +10,8 @@ sky:
     endpoint:  https://oss-cn-beijing.aliyuncs.com
     bucket-name: ren-yanyu
     region: cn-beijing
+  redis:
+      host: localhost
+      port: 6379
+      password: MAxinwei123456
+      database: 0
