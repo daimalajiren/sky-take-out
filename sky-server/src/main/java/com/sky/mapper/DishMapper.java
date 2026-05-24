@@ -40,5 +40,5 @@ public interface DishMapper {
     void update(Dish dish);
 
     @Select("select * from dish where status = 1 and category_id = #{categoryId}")
-    List<DishVO> list(Long categoryId);
+    List<Dish> list(Long categoryId);
 }

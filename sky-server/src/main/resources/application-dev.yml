@@ -15,3 +15,6 @@ sky:
       port: 6379
       password: MAxinwei123456
       database: 0
+  wechat:
+    appid: wx99a07b0011a0431e
+    secret: 01710bd766d1b1b910eaff096cb3d16f
