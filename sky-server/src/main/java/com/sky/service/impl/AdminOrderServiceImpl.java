@@ -134,7 +134,10 @@ public class AdminOrderServiceImpl implements AdminOrderService {
     @Override
     public void reject(OrdersRejectionDTO ordersRejectionDTO) {
         log.info("拒单：{}",ordersRejectionDTO);
-        //TODO 退款
+
+        Orders orders = orderMapper.getById(ordersRejectionDTO.getId());
+        if(orders.getPayStatus().equals(Orders.PAID))
+            orders.setPayStatus(Orders.REFUND);
         orderMapper.updateStatusAndRejectionReason(ordersRejectionDTO);
     }
 /**

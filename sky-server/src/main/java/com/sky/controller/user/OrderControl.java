@@ -1,17 +1,26 @@
 package com.sky.controller.user;
 
+import com.sky.config.StoreProperties;
+import com.sky.constant.MessageConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
+import com.sky.entity.AddressBook;
+import com.sky.exception.AddressBookBusinessException;
+import com.sky.exception.OrderBusinessException;
+import com.sky.mapper.AddressBookMapper;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.OrderService;
+import com.sky.utils.DistanceUtil;
 import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
 import com.sky.vo.OrderVO;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("userOrderControl")
@@ -21,18 +30,26 @@ public class OrderControl {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private StoreProperties storeProperties;
+    @Autowired
+    private AddressBookMapper addressBookMapper;
     /**
      * 用户下单
      * @param ordersSubmitDTO
      * @return
      */
     @PostMapping("/submit")
+
     public Result<OrderSubmitVO> sumbit(@RequestBody OrdersSubmitDTO ordersSubmitDTO)
     {
         log.info("用户提交订单：{}",ordersSubmitDTO);
         OrderSubmitVO orderSubmitVO = orderService.submitOrder(ordersSubmitDTO);
         return Result.success(orderSubmitVO);
     }
+
+
+
     @PutMapping("/payment")
     @ApiOperation("订单支付")
     public Result<OrderPaymentVO> payment(@RequestBody OrdersPaymentDTO ordersPaymentDTO) throws Exception {
@@ -95,4 +112,17 @@ public class OrderControl {
         return Result.success();
     }
 
+    /**
+     * 订单催单
+     * @param id
+     * @return
+     */
+    @GetMapping("/reminder/{id}")
+    public Result reminder(@PathVariable Long id)
+    {
+        log.info("订单催单：{}",id);
+        orderService.reminder(id);
+        return Result.success();
+
+    }
 }

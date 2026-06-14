@@ -60,4 +60,9 @@ public interface OrderMapper {
     void updateStatusAndRejectionReason(OrdersRejectionDTO ordersRejectionDTO);
 
     void updateDeliveryTime(Long id, LocalDateTime deliveryTime);
+    @Select("select * from orders where id = #{id}")
+    Orders getById(Long id);
+
+    @Select("select * from orders where status = #{status} and order_time < #{orderTime}")
+    List<Orders> getByStatusAndOrderTimeLT(Integer pendingPayment, LocalDateTime localDateTime);
 }

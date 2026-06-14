@@ -18,3 +18,8 @@ sky:
   wechat:
     appid: wx99a07b0011a0431e
     secret: 01710bd766d1b1b910eaff096cb3d16f
+# ... existing code ...
+
+store:
+  address: "河南省开封市河南大学金明校区东苑公寓"
+  max-delivery-distance: 5000

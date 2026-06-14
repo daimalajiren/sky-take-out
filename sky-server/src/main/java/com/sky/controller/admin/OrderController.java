@@ -56,7 +56,7 @@ public class OrderController {
     }
     /**
      * 接单
-     * @param id
+     * @param ordersConfirmDTO
      * @return
      */
     @PutMapping("/confirm")
@@ -90,10 +90,10 @@ public class OrderController {
                     adminOrderService.reject(ordersRejectionDTO);
                     return Result.success();
                 }
-                /**
+        /**
                  * 派送订单
                  * @param id
-                 * @return
+           * @return
                  */
                 @PutMapping("/delivery/{id}")
                 public Result delivery(@PathVariable Long id)
